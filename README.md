@@ -36,6 +36,6 @@ s3_prefix =
 
 ```
 
-## Note
+### Note
 
 Edit the configuration by running the command `pibooth --config`.

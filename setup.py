@@ -34,6 +34,7 @@ def main():
             'Topic :: Multimedia :: Graphics :: Capture :: Digital Camera',
         ],
         author="Joshua Higgins",
+        author_email="hello@joshuahiggins.com",
         url="https://github.com/joshuahiggins/pibooth-s3-upload",
         download_url="https://github.com/joshuahiggins/pibooth-s3-upload/archive/{}.tar.gz".format(plugin.__version__),
         license='GPLv3',
