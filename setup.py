@@ -17,8 +17,8 @@ def main():
         name=plugin.__name__,
         version=plugin.__version__,
         description=plugin.__doc__,
-        long_description=open(osp.join(HERE, 'README.rst'), encoding='utf-8').read(),
-        long_description_content_type='text/x-rst',
+        long_description=open(osp.join(HERE, 'README.md'), encoding='utf-8').read(),
+        long_description_content_type='text/markdown',
         classifiers=[
             'Development Status :: 5 - Production/Stable',
             'Environment :: Other Environment',
