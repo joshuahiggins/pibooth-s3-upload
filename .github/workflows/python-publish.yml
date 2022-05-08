@@ -31,6 +31,9 @@ jobs:
       run: |
         sudo apt-get install libsdl* libsmpeg-dev libportmidi-dev
         pip install pibooth
+    - name: Install boto3
+      run: |
+        pip install boto3
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
