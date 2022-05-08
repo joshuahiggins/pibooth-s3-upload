@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Plugin to upload pictures to S3 bucket"""
+"""pibooth plugin for uploading pictures to an S3 bucket"""
 
 import os
 import boto3
@@ -15,7 +15,7 @@ import pibooth
 from pibooth.utils import LOGGER
 
 
-__version__ = "1.0.0"
+__version__ = "0.0.1"
 
 SECTION = 'S3'
 
