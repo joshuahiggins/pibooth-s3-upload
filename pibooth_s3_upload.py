@@ -64,7 +64,7 @@ def state_processing_exit(app, cfg):
         upload_path = s3_prefix + os.path.basename(app.previous_picture_file)
 
         try:
-            response = app.s3_client.upload_file(app.previous_picture_file, s3_bucket_name, upload_path)
+            response = app.s3_client.upload_file(app.previous_picture_file, s3_bucket_name, upload_path, ExtraArgs={"ContentType": "image/jpeg"}))
             LOGGER.info("File uploaded to S3: " + upload_path)
         except ClientError as e:
             LOGGER.error(e)
