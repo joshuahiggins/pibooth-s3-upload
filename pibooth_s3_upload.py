@@ -25,6 +25,7 @@ def pibooth_configure(cfg):
     """Declare the new configuration options"""
     cfg.add_option(SECTION, 'aws_access_key', '', "AWS Access Key")
     cfg.add_option(SECTION, 'aws_secret_key', '', "AWS Secret Key")
+    cfg.add_option(SECTION, 's3_server_url', '', "(Optional) AWS S3 server URL : set it if you use an alternative S3 server")
     cfg.add_option(SECTION, 's3_bucket_name', '',
         "AWS S3 bucket name for uploading files",
         "Bucket name", '')
@@ -38,6 +39,7 @@ def pibooth_startup(app, cfg):
     """Verify AWS credentials"""
     aws_access_key = cfg.get(SECTION, 'aws_access_key')
     aws_secret_key = cfg.get(SECTION, 'aws_secret_key')
+    s3_server_url = cfg.get(SECTION, 's3_server_url')
     s3_bucket_name = cfg.get(SECTION, 's3_bucket_name')
 
     if not aws_access_key:
@@ -48,12 +50,20 @@ def pibooth_startup(app, cfg):
         LOGGER.error("S3 Bucket Name not defined in ["+SECTION+"][s3_bucket_name], uploading deactivated")
     else:
         LOGGER.info("Initializing S3 client")
-        app.s3_client = boto3.client(
-          's3',
-          aws_access_key_id=aws_access_key,
-          aws_secret_access_key=aws_secret_key
-        )
-
+        if s3_server_url:
+            LOGGER.info("Using custom S3 server:"+s3_server_url)
+            app.s3_client = boto3.client(
+                's3',
+                aws_access_key_id=aws_access_key,
+                aws_secret_access_key=aws_secret_key,
+                endpoint_url=s3_server_url
+            )
+        else:
+            app.s3_client = boto3.client(
+                's3',
+                aws_access_key_id=aws_access_key,
+                aws_secret_access_key=aws_secret_key,
+            )
 
 @pibooth.hookimpl
 def state_processing_exit(app, cfg):
